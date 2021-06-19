@@ -9,11 +9,13 @@ export class Game extends React.Component {
     this.state = {
       numberOfRows: 12,
       numberOfColors: 6,
-      decodingBoard: [1, 2, 3, 5],
+      decodingBoard: [1, 2, 3, 4],
       actualSelectedColor: 1,
+      isWon: false,
     };
 
     this.setColor = this.setColor.bind(this);
+    this.checkIfGameIsWon = this.checkIfGameIsWon.bind(this);
   }
 
   render() {
@@ -33,6 +35,7 @@ export class Game extends React.Component {
         <GameRow
           selectedColor={this.state.actualSelectedColor}
           gameSolution={this.state.decodingBoard}
+          checkIfGameIsWon={this.checkIfGameIsWon}
         />
       );
     }
@@ -41,5 +44,17 @@ export class Game extends React.Component {
 
   setColor(selectedColor) {
     this.setState({ actualSelectedColor: selectedColor });
+  }
+
+  checkIfGameIsWon(keyPegs) {
+    let isWon = true;
+
+    keyPegs.forEach((peg) => {
+      if (peg !== 2) {
+        isWon = false;
+      }
+    });
+
+    this.setState({ isWon: isWon });
   }
 }

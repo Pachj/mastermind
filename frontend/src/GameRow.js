@@ -34,58 +34,49 @@ export class GameRow extends React.Component {
     if (!this.state.codePegs.includes(this.props.selectedColor)) {
       let tmpCodePegsState = [...this.state.codePegs];
       tmpCodePegsState[index] = this.props.selectedColor;
-      this.setState({ codePegs: tmpCodePegsState });
-    }
-
-    if (this.state.codePegs.length + 1 === 4) {
-      console.log("checking");
-      this.setKeyPegs();
+      this.setState({ codePegs: tmpCodePegsState }, () => {
+        if (this.state.codePegs.length === 4) {
+          this.setKeyPegs(tmpCodePegsState);
+        }
+      });
     }
   }
 
   setKeyPegs() {
-    //const validIndexes = [0, 1, 2, 3];
     let keyPegsArray = [null, null, null, null];
 
-    //    for (let i = 0; i < 4; i++) {}
-
     for (let i = 0; i < 4; i++) {
+      //console.log(i);
       for (let j = 0; j < 4; j++) {
         if (this.state.codePegs[i] === this.props.gameSolution[j]) {
           // check if same position and same color
           if (i === j) {
-            keyPegsArray[this.random(keyPegsArray)] = "2";
+            keyPegsArray[i] = 2;
           }
           // color is used
           else {
-            keyPegsArray[this.random(keyPegsArray)] = "1";
+            keyPegsArray[i] = 1;
           }
         }
       }
     }
-    this.setState({ keyPegs: keyPegsArray });
+    keyPegsArray = this.shuffle(keyPegsArray);
+    this.setState({ keyPegs: keyPegsArray }, () => {
+      this.props.checkIfGameIsWon(this.state.keyPegs);
+    });
   }
 
-  // TODO Es werden momentan nur 3 statt 4 Werte gesetzt. Mir ist noch unklar an was das Problem liegt.
-  random(keyPegsArray) {
-    console.log(keyPegsArray);
-    while (1 === 1) {
-      const MAX = 4;
-      // Get an initial random value.
-      // Between 0 and 0.999999 (inclusive)
-      const initialRandom = Math.random();
-      // Multiply it by our MAX, 4.
-      // Will be between 0 and 3.999999 (inclusive)
-      const multiplied = initialRandom * MAX;
+  shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
 
-      // Round it down using Math.floor.
-      // Will be 0, 1, 2, or 3.
-      const randomIndex = Math.floor(multiplied);
-      console.log(randomIndex);
-
-      if (keyPegsArray[randomIndex] === null) {
-        return randomIndex;
-      }
+      // swap elements array[i] and array[j]
+      // we use "destructuring assignment" syntax to achieve that
+      // you'll find more details about that syntax in later chapters
+      // same can be written as:
+      // let t = array[i]; array[i] = array[j]; array[j] = t
+      [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
   }
 }
