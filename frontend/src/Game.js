@@ -1,7 +1,8 @@
 import React from "react";
-import { colors } from "./common";
 import { GameRow } from "./GameRow";
 import { ColorSelection } from "./ColorSelection";
+
+// TODO styling
 
 export class Game extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export class Game extends React.Component {
     return (
       <div id={"game"}>
         <ColorSelection setColor={this.setColor} />
-        <div>{rowsArray}</div>
+        <div id={"rows"}>{rowsArray}</div>
       </div>
     );
   }
