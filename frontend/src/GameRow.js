@@ -1,5 +1,6 @@
 import React from "react";
 import { Peg } from "./Peg";
+import { colors } from "./common";
 
 export class GameRow extends React.Component {
   constructor(props) {
@@ -7,6 +8,12 @@ export class GameRow extends React.Component {
 
     this.state = {
       codePegs: [],
+      codePegsBgColors: [
+        "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
+        "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
+        "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
+        "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
+      ],
     };
     this.setPeg = this.setPeg.bind(this);
   }
@@ -15,10 +22,22 @@ export class GameRow extends React.Component {
     return (
       <div className={"game-row"}>
         <div className={"code-pegs"}>
-          <Peg setPeg={() => this.setPeg(0)} />
-          <Peg setPeg={() => this.setPeg(1)} />
-          <Peg setPeg={() => this.setPeg(2)} />
-          <Peg setPeg={() => this.setPeg(3)} />
+          <Peg
+            bgColor={this.state.codePegsBgColors[0]}
+            setPeg={() => this.setPeg(0)}
+          />
+          <Peg
+            bgColor={this.state.codePegsBgColors[1]}
+            setPeg={() => this.setPeg(1)}
+          />
+          <Peg
+            bgColor={this.state.codePegsBgColors[2]}
+            setPeg={() => this.setPeg(2)}
+          />
+          <Peg
+            bgColor={this.state.codePegsBgColors[3]}
+            setPeg={() => this.setPeg(3)}
+          />
         </div>
         <div className={"key-pegs"}>
           <Peg />
@@ -34,6 +53,11 @@ export class GameRow extends React.Component {
     if (!this.state.codePegs.includes(this.props.selectedColor)) {
       let tmpCodePegsState = [...this.state.codePegs];
       tmpCodePegsState[index] = this.props.selectedColor;
+
+      let tmpBgColors = [...this.state.codePegsBgColors];
+      tmpBgColors[index] = colors[this.props.selectedColor];
+      this.setState({ codePegsBgColors: tmpBgColors });
+
       this.setState({ codePegs: tmpCodePegsState }, () => {
         if (this.state.codePegs.length === 4) {
           this.setKeyPegs(tmpCodePegsState);

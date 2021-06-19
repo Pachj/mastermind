@@ -6,6 +6,12 @@ export class Peg extends React.Component {
     super(props);
   }
   render() {
-    return <button className={"peg"} onClick={this.props.setPeg} />;
+    return (
+      <button
+        style={{ background: this.props.bgColor }}
+        className={"peg"}
+        onClick={this.props.setPeg}
+      />
+    );
   }
 }
