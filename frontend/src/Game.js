@@ -3,6 +3,9 @@ import { GameRow } from "./GameRow";
 import { ColorSelection } from "./ColorSelection";
 
 // TODO styling
+// TODO hide not current GameRow
+// TODO key
+// TODO colors palette
 
 export class Game extends React.Component {
   constructor(props) {
@@ -23,6 +26,7 @@ export class Game extends React.Component {
     let rowsArray = this.generateRowsArray();
     return (
       <div id={"game"}>
+        <h1>Mastermind</h1>
         <ColorSelection setColor={this.setColor} />
         <div id={"rows"}>{rowsArray}</div>
       </div>
