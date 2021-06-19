@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#game {
+  width: 1280px;
+}
+
+
+.game-row {
+  width: 100%;
+}
+
+.peg {
+  width: 30px;
+  height: 30px;
+}
+
+#color-selection button {
+  width: 30px;
+  height: 30px;
+}

@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { Game } from "./Game";
 
-ReactDOM.render(
-    <h1>Hello World</h1>, document.getElementById('root')
-);
+ReactDOM.render(<Game />, document.getElementById("root"));
