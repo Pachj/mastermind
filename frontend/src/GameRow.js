@@ -14,6 +14,7 @@ export class GameRow extends React.Component {
         "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
         "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
       ],
+      keyPegsElements: [<Peg />, <Peg />, <Peg />, <Peg />],
     };
     this.setPeg = this.setPeg.bind(this);
   }
@@ -39,12 +40,7 @@ export class GameRow extends React.Component {
             setPeg={() => this.setPeg(3)}
           />
         </div>
-        <div className={"key-pegs"}>
-          <Peg />
-          <Peg />
-          <Peg />
-          <Peg />
-        </div>
+        <div className={"key-pegs"}>{this.state.keyPegsElements}</div>
       </div>
     );
   }
@@ -86,6 +82,7 @@ export class GameRow extends React.Component {
     }
     keyPegsArray = this.shuffle(keyPegsArray);
     this.setState({ keyPegs: keyPegsArray }, () => {
+      this.generateKeyPegsElements();
       this.props.checkIfGameIsWon(this.state.keyPegs);
     });
   }
@@ -102,5 +99,28 @@ export class GameRow extends React.Component {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+  }
+
+  // TODO own KeyPeg Component
+  generateKeyPegsElements() {
+    let elements = [];
+    this.state.keyPegs.forEach((peg) => {
+      if (peg === 2) {
+        elements.push(<Peg bgColor={"orange"} onClick={this.props.setPeg} />);
+      } else if (peg === 1) {
+        elements.push(<Peg bgColor={"white"} onClick={this.props.setPeg} />);
+      } else {
+        elements.push(
+          <Peg
+            bgColor={
+              "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))"
+            }
+            onClick={this.props.setPeg}
+          />
+        );
+      }
+    });
+    console.log(elements);
+    this.setState({ keyPegsElements: elements });
   }
 }

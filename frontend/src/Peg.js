@@ -1,6 +1,6 @@
 import React from "react";
 
-// TODO: set background color
+// TODO: disable keyPegs
 export class Peg extends React.Component {
   constructor(props) {
     super(props);
