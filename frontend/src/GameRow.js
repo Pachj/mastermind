@@ -55,14 +55,15 @@ export class GameRow extends React.Component {
       this.setState({ codePegsBgColors: tmpBgColors });
 
       this.setState({ codePegs: tmpCodePegsState }, () => {
+        // if all pegs are set
         if (this.state.codePegs.length === 4) {
-          this.setKeyPegs(tmpCodePegsState);
+          this.finishRow(tmpCodePegsState);
         }
       });
     }
   }
 
-  setKeyPegs() {
+  finishRow() {
     let keyPegsArray = [null, null, null, null];
 
     for (let i = 0; i < 4; i++) {
