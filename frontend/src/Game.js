@@ -6,6 +6,7 @@ import { ColorSelection } from "./ColorSelection";
 // TODO hide not current GameRow
 // TODO key
 // TODO colors palette
+// TODO random decodingBoard generation
 
 export class Game extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export class Game extends React.Component {
     for (let i = 0; i < this.state.numberOfRows; i++) {
       rowsArray.push(
         <GameRow
+          key={`gameRow-${i}`}
           selectedColor={this.state.actualSelectedColor}
           gameSolution={this.state.decodingBoard}
           checkIfGameIsWon={this.checkIfGameIsWon}
