@@ -5,9 +5,7 @@ import { colors } from "./common";
 
 // TODO styling
 // TODO hide not current GameRow
-// TODO key
 // TODO colors palette
-// TODO random decodingBoard generation
 
 export class Game extends React.Component {
   constructor(props) {
