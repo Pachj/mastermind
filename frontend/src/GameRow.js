@@ -56,7 +56,10 @@ export class GameRow extends React.Component {
 
       this.setState({ codePegs: tmpCodePegsState }, () => {
         // if all pegs are set
-        if (!this.state.codePegs.includes(undefined)) {
+        if (
+          !this.state.codePegs.includes(undefined) &&
+          this.state.codePegs.length === 4
+        ) {
           this.finishRow(tmpCodePegsState);
         }
       });
