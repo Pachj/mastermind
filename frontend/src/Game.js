@@ -15,10 +15,9 @@ export class Game extends React.Component {
     this.state = {
       numberOfRows: 12,
       numberOfColors: 6,
-      decodingBoard: [1, 2, 3, 4],
+      decodingBoard: this.generateDecodingBoard(),
       actualSelectedColor: 1,
       isWon: false,
-      test: this.generateDecodingBoard,
     };
 
     this.setColor = this.setColor.bind(this);
@@ -68,18 +67,26 @@ export class Game extends React.Component {
   }
 
   generateDecodingBoard() {
+    const colorsAsArray = Object.keys(colors);
     let decodingBoard = [];
+
     let boardIsComplete = false;
-    let colorsAsArray;
-
-    console.log("before loop");
-    for (let color in colors) {
-      console.log("loop");
-      colorsAsArray.push(color);
+    while (!boardIsComplete) {
+      let isUnique = false;
+      while (!isUnique) {
+        let tmpColor = parseInt(
+          colorsAsArray[Math.floor(Math.random() * colorsAsArray.length)]
+        );
+        if (decodingBoard.indexOf(tmpColor) === -1) {
+          isUnique = true;
+          decodingBoard.push(tmpColor);
+        }
+      }
+      if (decodingBoard.length === 4) {
+        boardIsComplete = true;
+      }
     }
-    console.log(colorsAsArray);
-
-    //while (!boardIsComplete) {}
-    return colorsAsArray;
+    console.log(decodingBoard);
+    return decodingBoard;
   }
 }

@@ -14,7 +14,7 @@ export class GameRow extends React.Component {
         "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
         "-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59))",
       ],
-      keyPegsElements: [<Peg />, <Peg />, <Peg />, <Peg />],
+      keyPegsElements: [],
     };
     this.setPeg = this.setPeg.bind(this);
   }
@@ -106,10 +106,13 @@ export class GameRow extends React.Component {
   // TODO own KeyPeg Component
   generateKeyPegsElements() {
     let elements = [];
+    console.log("GENERATING");
     this.state.keyPegs.forEach((peg) => {
       if (peg === 2) {
+        console.log("GREEN");
         elements.push(<Peg bgColor={"green"} onClick={this.props.setPeg} />);
       } else if (peg === 1) {
+        console.log("ORANGE");
         elements.push(<Peg bgColor={"orange"} onClick={this.props.setPeg} />);
       } else {
         elements.push(
