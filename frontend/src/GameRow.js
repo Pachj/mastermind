@@ -66,8 +66,9 @@ export class GameRow extends React.Component {
   finishRow() {
     let keyPegsArray = [null, null, null, null];
 
+    // loop through user input
     for (let i = 0; i < 4; i++) {
-      //console.log(i);
+      // loop through solution
       for (let j = 0; j < 4; j++) {
         if (this.state.codePegs[i] === this.props.gameSolution[j]) {
           // check if same position and same color
@@ -81,8 +82,8 @@ export class GameRow extends React.Component {
         }
       }
     }
-    keyPegsArray = this.shuffle(keyPegsArray);
-    this.setState({ keyPegs: keyPegsArray }, () => {
+
+    this.setState({ keyPegs: this.shuffle(keyPegsArray) }, () => {
       this.generateKeyPegsElements();
       this.props.checkIfGameIsWon(this.state.keyPegs);
     });
@@ -107,9 +108,9 @@ export class GameRow extends React.Component {
     let elements = [];
     this.state.keyPegs.forEach((peg) => {
       if (peg === 2) {
-        elements.push(<Peg bgColor={"orange"} onClick={this.props.setPeg} />);
+        elements.push(<Peg bgColor={"green"} onClick={this.props.setPeg} />);
       } else if (peg === 1) {
-        elements.push(<Peg bgColor={"white"} onClick={this.props.setPeg} />);
+        elements.push(<Peg bgColor={"orange"} onClick={this.props.setPeg} />);
       } else {
         elements.push(
           <Peg
