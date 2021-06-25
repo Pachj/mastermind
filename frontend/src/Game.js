@@ -1,6 +1,7 @@
 import React from "react";
 import { GameRow } from "./GameRow";
 import { ColorSelection } from "./ColorSelection";
+import { colors } from "./common";
 
 // TODO styling
 // TODO hide not current GameRow
@@ -17,6 +18,7 @@ export class Game extends React.Component {
       decodingBoard: [1, 2, 3, 4],
       actualSelectedColor: 1,
       isWon: false,
+      test: this.generateDecodingBoard,
     };
 
     this.setColor = this.setColor.bind(this);
@@ -63,5 +65,21 @@ export class Game extends React.Component {
     });
 
     this.setState({ isWon: isWon });
+  }
+
+  generateDecodingBoard() {
+    let decodingBoard = [];
+    let boardIsComplete = false;
+    let colorsAsArray;
+
+    console.log("before loop");
+    for (let color in colors) {
+      console.log("loop");
+      colorsAsArray.push(color);
+    }
+    console.log(colorsAsArray);
+
+    //while (!boardIsComplete) {}
+    return colorsAsArray;
   }
 }
