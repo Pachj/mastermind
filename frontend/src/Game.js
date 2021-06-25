@@ -16,6 +16,8 @@ export class Game extends React.Component {
       decodingBoard: this.generateDecodingBoard(),
       actualSelectedColor: 1,
       isWon: false,
+      rowCounter: 0,
+      username: "Patrick",
     };
 
     this.setColor = this.setColor.bind(this);
@@ -58,10 +60,27 @@ export class Game extends React.Component {
     keyPegs.forEach((peg) => {
       if (peg !== 2) {
         isWon = false;
+        this.setState({ rowCounter: this.state.rowCounter + 1 });
       }
     });
 
     this.setState({ isWon: isWon });
+
+    // TODO
+    fetch("http://localhost:8080/score", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        score: this.state.score,
+        username: this.state.username,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
   }
 
   generateDecodingBoard() {
