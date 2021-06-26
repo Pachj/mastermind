@@ -11,12 +11,11 @@ export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfRows: 1,
+      numberOfRows: 12,
       numberOfColors: 6,
       decodingBoard: this.generateDecodingBoard(),
       actualSelectedColor: 1,
       score: 0,
-      username: "Patrick",
     };
 
     this.setColor = this.setColor.bind(this);
