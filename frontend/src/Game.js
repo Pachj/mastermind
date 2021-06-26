@@ -11,12 +11,11 @@ export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfRows: 12,
+      numberOfRows: 1,
       numberOfColors: 6,
       decodingBoard: this.generateDecodingBoard(),
       actualSelectedColor: 1,
-      isWon: false,
-      rowCounter: 0,
+      score: 0,
       username: "Patrick",
     };
 
@@ -54,35 +53,6 @@ export class Game extends React.Component {
     this.setState({ actualSelectedColor: selectedColor });
   }
 
-  checkIfGameIsWon(keyPegs) {
-    let isWon = true;
-
-    keyPegs.forEach((peg) => {
-      if (peg !== 2) {
-        isWon = false;
-        this.setState({ rowCounter: this.state.rowCounter + 1 });
-      }
-    });
-
-    this.setState({ isWon: isWon });
-
-    // TODO
-    fetch("http://localhost:8080/score", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        score: this.state.score,
-        username: this.state.username,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      });
-  }
-
   generateDecodingBoard() {
     const colorsAsArray = Object.keys(colors);
     let decodingBoard = [];
@@ -105,5 +75,21 @@ export class Game extends React.Component {
     }
     console.log(decodingBoard);
     return decodingBoard;
+  }
+
+  checkIfGameIsWon(keyPegs) {
+    let isWon = true;
+
+    keyPegs.forEach((peg) => {
+      if (peg !== 2) {
+        isWon = false;
+        this.setState({ rowCounter: this.state.score + 1 });
+      }
+    });
+
+    if (isWon || (this.state.score === this.state.numberOfRows) ||
+      (isWon && (this.state.score === this.state.numberOfRows))) {
+      this.props.endGame(isWon, this.state.score);
+    }
   }
 }
