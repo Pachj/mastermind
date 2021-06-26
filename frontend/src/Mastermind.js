@@ -2,6 +2,10 @@ import React from "react";
 import {Game} from "./Game";
 import {WelcomeScreen} from "./WelcomeScreen";
 
+// TODO: hide Welcome Screen after usename is entered
+// TODO: show leaderboard
+// TODO: start new game button
+
 export class Mastermind extends React.Component {
   constructor(props) {
     super(props);
