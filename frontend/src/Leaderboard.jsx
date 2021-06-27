@@ -11,11 +11,13 @@ export class Leaderboard extends React.Component {
     return (
       <div>
         <table>
-          <tr>
-            <th>Username</th>
-            <th>Score</th>
-          </tr>
-          {this.state.leaderboardElements}
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>{this.state.leaderboardElements}</tbody>
         </table>
       </div>
     );
