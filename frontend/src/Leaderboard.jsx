@@ -19,6 +19,7 @@ export class Leaderboard extends React.Component {
           </thead>
           <tbody>{this.state.leaderboardElements}</tbody>
         </table>
+        <button onClick={this.props.closeLeaderboard}>Close Leaderboard</button>
       </div>
     );
   }

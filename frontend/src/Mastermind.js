@@ -1,11 +1,13 @@
 import React from 'react';
 import { Game } from './Game';
 import { WelcomeScreen } from './WelcomeScreen';
+import { Leaderboard } from './Leaderboard';
 
 // TODO: hide Welcome Screen after usename is entered
 // TODO: show leaderboard
 // TODO: start new game button
 // TODO: js files to jsx
+// TODO: show Leaderboard
 
 export class Mastermind extends React.Component {
   constructor(props) {
@@ -13,10 +15,12 @@ export class Mastermind extends React.Component {
 
     this.state = {
       username: '',
-      game: <></>,
       gameIsRunning: false,
+      showLeaderboard: false,
     };
 
+    this.closeLeaderboard = this.closeLeaderboard.bind(this);
+    this.showLeaderboard = this.showLeaderboard.bind(this);
     this.setUsername = this.setUsername.bind(this);
     this.startGame = this.startGame.bind(this);
     this.endGame = this.endGame.bind(this);
@@ -25,10 +29,24 @@ export class Mastermind extends React.Component {
   render() {
     let renderContent;
 
-    if (this.state.gameIsRunning) {
-      renderContent = <Game endGame={this.endGame} />;
+    if (this.state.showLeaderboard) {
+      renderContent = <Leaderboard closeLeaderboard={this.closeLeaderboard} />;
     } else {
-      renderContent = <WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />;
+      if (this.state.gameIsRunning) {
+        renderContent = (
+          <>
+            <button onClick={this.showLeaderboard}>Show Leaderboard</button>
+            <Game endGame={this.endGame} />
+          </>
+        );
+      } else {
+        renderContent = (
+          <>
+            <button onClick={this.showLeaderboard}>Show Leaderboard</button>
+            <WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />
+          </>
+        );
+      }
     }
 
     return <div>{renderContent}</div>;
@@ -62,5 +80,13 @@ export class Mastermind extends React.Component {
         username: this.state.username,
       }),
     });
+  }
+
+  showLeaderboard() {
+    this.setState({ showLeaderboard: true });
+  }
+
+  closeLeaderboard() {
+    this.setState({ showLeaderboard: false });
   }
 }
