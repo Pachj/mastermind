@@ -1,7 +1,7 @@
-import React from "react";
-import { GameRow } from "./GameRow";
-import { ColorSelection } from "./ColorSelection";
-import { colors } from "./common";
+import React from 'react';
+import { GameRow } from './GameRow';
+import { ColorSelection } from './ColorSelection';
+import { colors } from './common';
 
 // TODO styling
 // TODO hide not current GameRow
@@ -12,7 +12,6 @@ export class Game extends React.Component {
     super(props);
     this.state = {
       numberOfRows: 12,
-      numberOfColors: 6,
       decodingBoard: this.generateDecodingBoard(),
       actualSelectedColor: 1,
       score: 0,
@@ -25,10 +24,10 @@ export class Game extends React.Component {
   render() {
     let rowsArray = this.generateRowsArray();
     return (
-      <div id={"game"}>
+      <div id={'game'}>
         <h1>Mastermind</h1>
         <ColorSelection setColor={this.setColor} />
-        <div id={"rows"}>{rowsArray}</div>
+        <div id={'rows'}>{rowsArray}</div>
       </div>
     );
   }
@@ -42,7 +41,7 @@ export class Game extends React.Component {
           selectedColor={this.state.actualSelectedColor}
           gameSolution={this.state.decodingBoard}
           checkIfGameIsWon={this.checkIfGameIsWon}
-        />
+        />,
       );
     }
     return rowsArray;
@@ -60,9 +59,7 @@ export class Game extends React.Component {
     while (!boardIsComplete) {
       let isUnique = false;
       while (!isUnique) {
-        let tmpColor = parseInt(
-          colorsAsArray[Math.floor(Math.random() * colorsAsArray.length)]
-        );
+        let tmpColor = parseInt(colorsAsArray[Math.floor(Math.random() * colorsAsArray.length)]);
         if (decodingBoard.indexOf(tmpColor) === -1) {
           isUnique = true;
           decodingBoard.push(tmpColor);
@@ -78,17 +75,25 @@ export class Game extends React.Component {
 
   checkIfGameIsWon(keyPegs) {
     let isWon = true;
+    const score = this.state.score + 1;
 
     keyPegs.forEach((peg) => {
       if (peg !== 2) {
         isWon = false;
-        this.setState({ rowCounter: this.state.score + 1 });
       }
     });
 
-    if (isWon || (this.state.score === this.state.numberOfRows) ||
-      (isWon && (this.state.score === this.state.numberOfRows))) {
-      this.props.endGame(isWon, this.state.score);
+    console.log(score);
+    console.log(this.state.numberOfRows);
+
+    if (
+      isWon ||
+      score === this.state.numberOfRows ||
+      (isWon && score === this.state.numberOfRows)
+    ) {
+      this.props.endGame(isWon, score);
     }
+
+    this.setState({ score: score });
   }
 }
