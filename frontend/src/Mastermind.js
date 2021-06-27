@@ -1,17 +1,18 @@
-import React from "react";
-import {Game} from "./Game";
-import {WelcomeScreen} from "./WelcomeScreen";
+import React from 'react';
+import { Game } from './Game';
+import { WelcomeScreen } from './WelcomeScreen';
 
 // TODO: hide Welcome Screen after usename is entered
 // TODO: show leaderboard
 // TODO: start new game button
+// TODO: js files to jsx
 
 export class Mastermind extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
+      username: '',
       game: <></>,
     };
 
@@ -21,16 +22,20 @@ export class Mastermind extends React.Component {
   }
 
   render() {
-    return (<div><WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />
-    {this.state.game}</div>);
+    return (
+      <div>
+        <WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />
+        {this.state.game}
+      </div>
+    );
   }
 
   setUsername(username) {
-    this.setState({username: username});
+    this.setState({ username: username });
   }
 
   startGame() {
-    this.setState({game: <Game endGame={this.endGame}/>});
+    this.setState({ game: <Game endGame={this.endGame} /> });
   }
 
   endGame(gameIsWon, score) {
@@ -40,21 +45,17 @@ export class Mastermind extends React.Component {
   }
 
   setLeaderboardEntry(score) {
+    console.log(this.state.username);
     // TODO
-    fetch("http://localhost:8080/score", {
-      method: "post",
+    fetch('http://localhost:8080/score', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         score: score,
         username: this.state.username,
       }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      });
+    });
   }
-
 }
