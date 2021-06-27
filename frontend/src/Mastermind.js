@@ -14,6 +14,7 @@ export class Mastermind extends React.Component {
     this.state = {
       username: '',
       game: <></>,
+      gameIsRunning: false,
     };
 
     this.setUsername = this.setUsername.bind(this);
@@ -22,12 +23,15 @@ export class Mastermind extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />
-        {this.state.game}
-      </div>
-    );
+    let renderContent;
+
+    if (this.state.gameIsRunning) {
+      renderContent = <Game endGame={this.endGame} />;
+    } else {
+      renderContent = <WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />;
+    }
+
+    return <div>{renderContent}</div>;
   }
 
   setUsername(username) {
@@ -35,13 +39,14 @@ export class Mastermind extends React.Component {
   }
 
   startGame() {
-    this.setState({ game: <Game endGame={this.endGame} /> });
+    this.setState({ gameIsRunning: true });
   }
 
   endGame(gameIsWon, score) {
     if (gameIsWon) {
       this.setLeaderboardEntry(score);
     }
+    this.setState({ gameIsRunning: false });
   }
 
   setLeaderboardEntry(score) {
