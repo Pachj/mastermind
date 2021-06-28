@@ -30,7 +30,12 @@ export class Mastermind extends React.Component {
     let renderContent;
 
     if (this.state.showLeaderboard) {
-      renderContent = <Leaderboard closeLeaderboard={this.closeLeaderboard} />;
+      renderContent = (
+        <Leaderboard
+          handleNetworkError={this.handleNetworkError}
+          closeLeaderboard={this.closeLeaderboard}
+        />
+      );
     } else {
       if (this.state.gameIsRunning) {
         renderContent = (
@@ -79,6 +84,8 @@ export class Mastermind extends React.Component {
         score: score,
         username: this.state.username,
       }),
+    }).catch((err) => {
+      this.handleNetworkError(err);
     });
   }
 
@@ -88,5 +95,9 @@ export class Mastermind extends React.Component {
 
   closeLeaderboard() {
     this.setState({ showLeaderboard: false });
+  }
+
+  handleNetworkError(err) {
+    console.log(err);
   }
 }

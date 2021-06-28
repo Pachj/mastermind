@@ -47,6 +47,9 @@ export class Leaderboard extends React.Component {
         });
 
         this.setState({ leaderboardElements: leaderboardElements });
+      })
+      .catch((err) => {
+        this.props.handleNetworkError(err);
       });
   }
 }
