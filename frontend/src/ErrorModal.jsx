@@ -18,8 +18,7 @@ export class ErrorModal extends React.Component {
           },
         }}
       >
-        <p className={'error-message'}>Server is not Responding!</p>
-        <p>Please try again later.</p>
+        <p className={'error-message'}>Server is not Responding! Please try again later.</p>
       </ReactModal>
     );
   }

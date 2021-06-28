@@ -4,11 +4,7 @@ import { WelcomeScreen } from './WelcomeScreen';
 import { Leaderboard } from './Leaderboard';
 import { ErrorModal } from './ErrorModal';
 
-// TODO: hide Welcome Screen after usename is entered
-// TODO: show leaderboard
 // TODO: start new game button
-// TODO: js files to jsx
-// TODO: show Leaderboard
 
 export class Mastermind extends React.Component {
   constructor(props) {
@@ -21,6 +17,7 @@ export class Mastermind extends React.Component {
       showErrorModal: false,
     };
 
+    this.handleNetworkError = this.handleNetworkError.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.closeLeaderboard = this.closeLeaderboard.bind(this);
     this.showLeaderboard = this.showLeaderboard.bind(this);
