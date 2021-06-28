@@ -2,6 +2,7 @@ import React from 'react';
 import { Game } from './Game';
 import { WelcomeScreen } from './WelcomeScreen';
 import { Leaderboard } from './Leaderboard';
+import { ErrorModal } from './ErrorModal';
 
 // TODO: hide Welcome Screen after usename is entered
 // TODO: show leaderboard
@@ -17,8 +18,10 @@ export class Mastermind extends React.Component {
       username: '',
       gameIsRunning: false,
       showLeaderboard: false,
+      showErrorModal: false,
     };
 
+    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.closeLeaderboard = this.closeLeaderboard.bind(this);
     this.showLeaderboard = this.showLeaderboard.bind(this);
     this.setUsername = this.setUsername.bind(this);
@@ -54,7 +57,12 @@ export class Mastermind extends React.Component {
       }
     }
 
-    return <div>{renderContent}</div>;
+    return (
+      <div>
+        {renderContent}
+        <ErrorModal isOpen={this.state.showErrorModal} closeModal={this.handleCloseModal} />
+      </div>
+    );
   }
 
   setUsername(username) {
@@ -62,6 +70,11 @@ export class Mastermind extends React.Component {
   }
 
   startGame() {
+    // check if backend is responding, or throw an error
+    fetch('http://localhost:8080/score').catch((err) => {
+      this.handleNetworkError(err);
+    });
+
     this.setState({ gameIsRunning: true });
   }
 
@@ -73,8 +86,6 @@ export class Mastermind extends React.Component {
   }
 
   setLeaderboardEntry(score) {
-    console.log(this.state.username);
-    // TODO
     fetch('http://localhost:8080/score', {
       method: 'post',
       headers: {
@@ -98,6 +109,14 @@ export class Mastermind extends React.Component {
   }
 
   handleNetworkError(err) {
-    console.log(err);
+    this.setState({ showErrorModal: true });
+  }
+
+  handleOpenModal() {
+    this.setState({ showErrorModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showErrorModal: false });
   }
 }
