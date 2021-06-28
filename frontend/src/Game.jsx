@@ -83,9 +83,7 @@ export class Game extends React.Component {
       }
     });
 
-    console.log(score);
-    console.log(this.state.numberOfRows);
-
+    // check if game is won or if all rows are filled
     if (
       isWon ||
       score === this.state.numberOfRows ||
