@@ -1,10 +1,40 @@
-import React from "react";
+import React from 'react';
+import ReactModal from 'react-modal';
 
 export class WelcomeScreen extends React.Component {
   render() {
-    return (<div>
-      <input type={"text"} onChange={(input) => {this.props.setUsername(input.target.value)}}/>
-      <button onClick={this.props.startGame}>Start Game</button>
-    </div>);
+    return (
+      <ReactModal
+        isOpen={this.props.isOpen}
+        ariaHideApp={false}
+        style={{
+          content: {
+            width: '670px',
+            margin: 'auto',
+            height: '200px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+        <div>
+          <input
+            type={'text'}
+            onChange={(input) => {
+              this.props.setUsername(input.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              this.props.closeModal();
+              this.props.startGame();
+            }}
+          >
+            Start Game
+          </button>
+        </div>
+      </ReactModal>
+    );
   }
 }

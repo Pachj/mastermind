@@ -15,6 +15,7 @@ export class Mastermind extends React.Component {
       gameIsRunning: false,
       showLeaderboard: false,
       showErrorModal: false,
+      showWelcomeScreen: true,
     };
 
     this.handleNetworkError = this.handleNetworkError.bind(this);
@@ -26,6 +27,7 @@ export class Mastermind extends React.Component {
     this.endGame = this.endGame.bind(this);
   }
 
+  // TODO: refactor render logic
   render() {
     let renderContent;
 
@@ -44,20 +46,19 @@ export class Mastermind extends React.Component {
             <Game endGame={this.endGame} />
           </>
         );
-      } else {
-        renderContent = (
-          <>
-            <button onClick={this.showLeaderboard}>Show Leaderboard</button>
-            <WelcomeScreen startGame={this.startGame} setUsername={this.setUsername} />
-          </>
-        );
       }
     }
 
     return (
       <div>
         {renderContent}
-        <ErrorModal isOpen={this.state.showErrorModal} closeModal={this.handleCloseModal} />
+        <ErrorModal isOpen={this.state.showErrorModal} />
+        <WelcomeScreen
+          isOpen={this.state.showWelcomeScreen}
+          closeModal={this.handleCloseModal}
+          setUsername={this.setUsername}
+          startGame={this.startGame}
+        />
       </div>
     );
   }
@@ -110,10 +111,10 @@ export class Mastermind extends React.Component {
   }
 
   handleOpenModal() {
-    this.setState({ showErrorModal: true });
+    this.setState({ showWelcomeScreen: true });
   }
 
   handleCloseModal() {
-    this.setState({ showErrorModal: false });
+    this.setState({ showWelcomeScreen: false });
   }
 }
