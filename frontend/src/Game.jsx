@@ -6,12 +6,13 @@ import { colors } from './common';
 // TODO styling
 // TODO hide not current GameRow
 // TODO colors palette
+// TODO handling game end and start of new game
 
 export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfRows: 12,
+      numberOfRows: 2,
       decodingBoard: this.generateDecodingBoard(),
       actualSelectedColor: 1,
       score: 0,

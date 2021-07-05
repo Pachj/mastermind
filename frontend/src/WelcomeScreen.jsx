@@ -19,11 +19,13 @@ export class WelcomeScreen extends React.Component {
         }}
       >
         <div>
+          <label htmlFor={'username-input'}>Username</label>
           <input
             type={'text'}
             onChange={(input) => {
               this.props.setUsername(input.target.value);
             }}
+            id={'username-input'}
           />
           <button
             onClick={() => {
