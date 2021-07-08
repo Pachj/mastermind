@@ -7,6 +7,7 @@ import { colors } from './common';
 // TODO hide not current GameRow
 // TODO colors palette
 // TODO handling game end and start of new game
+// TODO remove fixed width
 
 export class Game extends React.Component {
   constructor(props) {
@@ -26,7 +27,6 @@ export class Game extends React.Component {
     let rowsArray = this.generateRowsArray();
     return (
       <div id={'game'}>
-        <h1>Mastermind</h1>
         <ColorSelection setColor={this.setColor} />
         <div id={'rows'}>{rowsArray}</div>
       </div>
