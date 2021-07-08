@@ -25,7 +25,7 @@ export class WelcomeScreen extends React.Component {
               this.props.setUsername(input.target.value);
             }}
             id={'username-input'}
-            placeholder={'insert username'}
+            placeholder={'Username'}
           />
           <button
             onClick={() => {
