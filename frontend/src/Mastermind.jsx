@@ -49,8 +49,10 @@ export class Mastermind extends React.Component {
       }
     }
 
+    // TODO: Leaderboard as Modal
     return (
       <div>
+        <h1>Mastermind</h1>
         {renderContent}
         <ErrorModal isOpen={this.state.showErrorModal} />
         <WelcomeScreen
@@ -59,6 +61,7 @@ export class Mastermind extends React.Component {
           setUsername={this.setUsername}
           startGame={this.startGame}
         />
+        <footer>Made by Henry Joerg</footer>
       </div>
     );
   }
