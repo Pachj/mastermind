@@ -29,7 +29,7 @@ export class Mastermind extends React.Component {
 
   // TODO: refactor render logic
   render() {
-    let renderContent;
+    /*    let renderContent;
 
     if (this.state.showLeaderboard) {
       renderContent = (
@@ -47,13 +47,18 @@ export class Mastermind extends React.Component {
           </>
         );
       }
-    }
+    }*/
 
-    // TODO: Leaderboard as Modal
     return (
       <div>
         <h1>Mastermind</h1>
-        {renderContent}
+        <button onClick={this.showLeaderboard}>Show Leaderboard</button>
+        <Game endGame={this.endGame} />
+        <Leaderboard
+          handleNetworkError={this.handleNetworkError}
+          isOpen={this.state.showLeaderboard}
+          closeLeaderboard={this.closeLeaderboard}
+        />
         <ErrorModal isOpen={this.state.showErrorModal} />
         <WelcomeScreen
           isOpen={this.state.showWelcomeScreen}

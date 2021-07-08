@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactModal from 'react-modal';
 
 export class Leaderboard extends React.Component {
   constructor(props) {
@@ -9,18 +10,34 @@ export class Leaderboard extends React.Component {
 
   render() {
     return (
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>{this.state.leaderboardElements}</tbody>
-        </table>
-        <button onClick={this.props.closeLeaderboard}>Close Leaderboard</button>
-      </div>
+      <ReactModal
+        isOpen={this.props.isOpen}
+        ariaHideApp={false}
+        onRequestClose={this.props.closeLeaderboard}
+        shouldCloseOnOverlayClick={true}
+        style={{
+          content: {
+            width: '670px',
+            margin: 'auto',
+            height: '200px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>{this.state.leaderboardElements}</tbody>
+          </table>
+        </div>
+      </ReactModal>
     );
   }
 
