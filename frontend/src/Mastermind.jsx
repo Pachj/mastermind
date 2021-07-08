@@ -52,7 +52,11 @@ export class Mastermind extends React.Component {
     return (
       <div>
         <h1>Mastermind</h1>
-        <button onClick={this.showLeaderboard}>Show Leaderboard</button>
+        <div id={'leaderboard-button-container'}>
+          <button className={'username-button'} onClick={this.showLeaderboard}>
+            Show Leaderboard
+          </button>
+        </div>
         <Game endGame={this.endGame} />
         <Leaderboard
           handleNetworkError={this.handleNetworkError}

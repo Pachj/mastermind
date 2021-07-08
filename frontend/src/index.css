@@ -83,7 +83,7 @@ h1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-#username-button {
+.username-button {
   margin: 5px;
   height: 45px;
   padding: 10px;
@@ -94,7 +94,7 @@ h1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-#username-button:hover {
+.username-button:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
@@ -105,4 +105,10 @@ footer {
   width: 100%;
   text-align: center;
   padding: 8px;
+}
+
+#leaderboard-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.67rem;
 }
