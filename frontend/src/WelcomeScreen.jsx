@@ -33,7 +33,7 @@ export class WelcomeScreen extends React.Component {
               this.props.startGame();
             }}
             id={'username-button'}
-            className={'big-button'}
+            className={'username-button'}
           >
             Start Game
           </button>
