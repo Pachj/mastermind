@@ -5,7 +5,7 @@ import { Leaderboard } from './Leaderboard';
 import { ErrorModal } from './ErrorModal';
 import { GameEndModal } from './GameEndModal';
 
-// TODO: start new game button
+// TODO: testing!
 
 export class Mastermind extends React.Component {
   constructor(props) {
@@ -33,28 +33,7 @@ export class Mastermind extends React.Component {
     this.closeGameEndModal = this.closeGameEndModal.bind(this);
   }
 
-  // TODO: refactor render logic
   render() {
-    /*    let renderContent;
-
-    if (this.state.showLeaderboard) {
-      renderContent = (
-        <Leaderboard
-          handleNetworkError={this.handleNetworkError}
-          closeLeaderboard={this.closeLeaderboard}
-        />
-      );
-    } else {
-      if (this.state.gameIsRunning) {
-        renderContent = (
-          <>
-            <button onClick={this.showLeaderboard}>Show Leaderboard</button>
-            <Game endGame={this.endGame} />
-          </>
-        );
-      }
-    }*/
-
     return (
       <div>
         <h1>Mastermind</h1>
@@ -104,7 +83,7 @@ export class Mastermind extends React.Component {
 
   endGame(gameIsWon, score) {
     if (gameIsWon) {
-      this.setState({ hasWon: false });
+      this.setState({ hasWon: true });
       this.setLeaderboardEntry(score);
     }
 
