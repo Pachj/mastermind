@@ -22,7 +22,7 @@ export class GameEndModal extends React.Component {
         }}
       >
         <div className={'game-end-container'}>
-          <p>
+          <p className={'error-message'}>
             {this.props.hasWon === true ? 'You have Won!' : "You haven't won. You will get there!"}
           </p>
           <button className={'username-button'} onClick={this.props.startGame}>
