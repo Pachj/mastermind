@@ -26,6 +26,7 @@ export class WelcomeScreen extends React.Component {
             }}
             id={'username-input'}
             placeholder={'Username'}
+            autoFocus={true}
           />
           <button
             onClick={() => {
