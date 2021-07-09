@@ -45,6 +45,12 @@ export class Leaderboard extends React.Component {
     this.createEntriesElements();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.isOpen !== this.props.isOpen) {
+      this.createEntriesElements();
+    }
+  }
+
   createEntriesElements() {
     fetch('http://localhost:8080/score')
       .then((res) => res.json())
